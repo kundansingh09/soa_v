@@ -16,7 +16,7 @@ SPLIT_METHOD = 'vertical'
 # --- 2. Model Parameters ---
 NUM_PARTICIPANTS = 2  # [cite: 317]
 # Participant model is VGG16, Server is 3-layer FC NN [cite: 319]
-PARTICIPANT_MODEL_TYPE = 'vgg16'
+PARTICIPANT_MODEL_TYPE = 'resnet18'
 SERVER_MODEL_TYPE = 'fc_3_layer'
 # Default aggregation is concatenation [cite: 331]
 EMBEDDING_AGGREGATION = 'concatenation'

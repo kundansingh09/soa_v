@@ -18,8 +18,8 @@ import os
 # (Assumes project root is in sys.path)
 try:
     from src.attack.label_inference import CandidateSelectionModel, EmbeddingSwapper
-    from src.models.participant_vgg import ParticipantVGG16
-    
+    from src.models.participant_model import ParticipantResNet18 # or ParticipantVGG16, or just nn.Module
+        
     # These are assumed to exist, as per the paper's description
     from src.attack.data_poisoning import (
         get_trigger_mask, 

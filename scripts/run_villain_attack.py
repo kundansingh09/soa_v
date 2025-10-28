@@ -28,7 +28,7 @@ if project_root not in sys.path:
 try:
     from config.cifar10 import *
     from data.cifar10_loader import load_cifar10, get_vsl_dataloaders
-    from src.models.participant_vgg import ParticipantVGG16
+    from src.models.participant_model import get_participant_model
     from src.models.server_model import ServerModel
     from src.attack.attacker import AttackerParticipant
 except ImportError as e:
@@ -109,8 +109,8 @@ def main():
 
     # --- 4. Initialize Models ---
     print("Initializing models...")
-    model_A_malicious = ParticipantVGG16().to(DEVICE)
-    model_B = ParticipantVGG16().to(DEVICE)
+    model_A_malicious = get_participant_model(PARTICIPANT_MODEL_TYPE).to(DEVICE)
+    model_B = get_participant_model(PARTICIPANT_MODEL_TYPE).to(DEVICE)
     model_S = ServerModel(
         participant_embedding_dim=model_A_malicious.embedding_dim,
         num_participants=NUM_PARTICIPANTS,

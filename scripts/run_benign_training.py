@@ -30,7 +30,7 @@ try:
         PARTICIPANT_MODEL_TYPE, NUM_PARTICIPANTS, EMBEDDING_AGGREGATION
     )
     from data.cifar10_loader import load_cifar10, get_vsl_dataloaders
-    from src.models.participant_vgg import ParticipantVGG16
+    from src.models.participant_model import get_participant_model
     from src.models.server_model import ServerModel
     from src.vsl.training import train_benign_epoch
 except ImportError as e:
@@ -76,13 +76,8 @@ def main():
     )
     print("Data loaders created.")
     
-    # --- 3. Initialize Models ---
-    print("Initializing models...")
-    if PARTICIPANT_MODEL_TYPE != 'vgg16':
-        raise ValueError("This script is configured for VGG16 participant models.")
-        
-    model_A = ParticipantVGG16().to(DEVICE)
-    model_B = ParticipantVGG16().to(DEVICE)
+    model_A = get_participant_model(PARTICIPANT_MODEL_TYPE).to(DEVICE)
+    model_B = get_participant_model(PARTICIPANT_MODEL_TYPE).to(DEVICE) 
     
     if EMBEDDING_AGGREGATION != 'concatenation':
         raise ValueError("This script assumes 'concatenation' aggregation.")

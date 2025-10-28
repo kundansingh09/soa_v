@@ -33,7 +33,7 @@ try:
         NUM_PARTICIPANTS, EMBEDDING_AGGREGATION, TRIGGER_MAGNITUDE_BETA
     )
     from data.cifar10_loader import load_cifar10, get_vsl_dataloaders
-    from src.models.participant_vgg import ParticipantVGG16
+    from src.models.participant_model import get_participant_model
     from src.models.server_model import ServerModel
     from src.attack.data_poisoning import create_trigger_mask, fabricate_trigger
 except ImportError as e:
@@ -184,8 +184,8 @@ def main():
     # --- 1. Load Models ---
     print("Loading backdoored models...")
     try:
-        model_A = ParticipantVGG16().to(DEVICE)
-        model_B = ParticipantVGG16().to(DEVICE)
+        model_A = get_participant_model(PARTICIPANT_MODEL_TYPE).to(DEVICE)
+        model_B = get_participant_model(PARTICIPANT_MODEL_TYPE).to(DEVICE)
         model_S = ServerModel(
             participant_embedding_dim=model_A.embedding_dim,
             num_participants=NUM_PARTICIPANTS,
